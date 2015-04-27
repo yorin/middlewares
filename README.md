@@ -1,5 +1,5 @@
-Random proxy middleware for Scrapy (http://scrapy.org/)
-=======================================================
+randomproxy.py middleware for Scrapy (http://scrapy.org/)
+========================================================
 
 Processes Scrapy requests using a random proxy from list to avoid IP ban and
 improve crawling speed.
@@ -38,4 +38,21 @@ checking for site logo or some other significant element.
 If not - retry request with dont_filter=True
 
     if not hxs.select('//get/site/logo'):
-        yield Request(url=response.url, dont_filter=True)
+        yield Request(url=response.url, dont_filter=True)  
+  
+  
+randomuseragent.py middleware for Scrapy (http://scrapy.org/)
+============================================================
+
+Processes Scrapy provides random useragents from list to avoid ban.
+
+The default user_agent_list composes chrome,I E,firefox,Mozilla,opera,netscape  
+for more user agent strings,you can find it in http://www.useragentstring.com/pages/useragentstring.php  
+
+settings.py
+-----------
+    DOWNLOADER_MIDDLEWARES = {
+        'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware' : None,
+        'Crawler.comm.rotate_useragent.RotateUserAgentMiddleware' :400
+    }
+    Note: Don't use 'USER_AGENT' in settings.py and add the following into it.
